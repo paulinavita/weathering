@@ -6,6 +6,7 @@ Weather application built with Next.js that provides real-time weather informati
 
 - Real-time weather data
 - Search weather by city
+- Forecast weekly weather
 
 ## Tech Stack
 
@@ -45,7 +46,10 @@ NEXT_PUBLIC_WEATHER_API_KEY=your_api_key_here
 pnpm dev
 ```
 
+5. 
+```bash
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```
 
 ## Project Structure
 
