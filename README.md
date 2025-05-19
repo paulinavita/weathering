@@ -46,7 +46,8 @@ NEXT_PUBLIC_WEATHER_API_KEY=your_api_key_here
 pnpm dev
 ```
 
-5. 
+5. Running the application
+
 ```bash
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 ```
@@ -61,14 +62,18 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 └── ...
 ```
 
-## Flow
-
-![App Flow](./docs/flow_img.png)
-
 ## Test
 
-To run test you can run
+To run test you can run from the terminal
 
 ```bash
 pnpm test
 ```
+
+## UML Diagram
+
+Sequence Diagram
+![App Flow](./docs/flow_img.png)
+
+Architecture
+![Architecture](./docs/arch_img.png)
