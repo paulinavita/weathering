@@ -37,6 +37,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       <div className="text-sm font-semibold">Search by city</div>
       <div className="flex items-center gap-2">
         <Input
+          data-testid="search-input"
           value={search}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setSearch(e.target.value)
@@ -49,8 +50,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
           disabled={isLoading}
           onClick={handleSearch}
           className="min-w-20"
+          data-testid="search-btn"
         >
-          {isLoading ? <Loader2 className="animate-spin" /> : "Search"}
+          {isLoading ? (
+            <Loader2 data-testid="search-btn-loader" className="animate-spin" />
+          ) : (
+            "Search"
+          )}
         </Button>
       </div>
     </div>
