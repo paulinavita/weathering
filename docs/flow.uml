@@ -1,0 +1,85 @@
+@startuml Weather_App_Backend_Flow
+
+' Styling
+skinparam backgroundColor white
+skinparam sequence {
+    ArrowColor #666666
+    LifeLineBorderColor #666666
+    LifeLineBackgroundColor #f5f5f5
+    ParticipantBorderColor #666666
+    ParticipantBackgroundColor #f5f5f5
+    ParticipantFontName Impact
+    ParticipantFontSize 17
+    ParticipantFontStyle #666666
+    ActorBorderColor #666666
+    ActorFontColor #666666
+    ActorFontStyle #666666
+}
+
+actor User
+participant "Frontend" as FE
+
+box "Backend"
+  participant "API Route" as API
+  participant "WeatherService" as WS
+  participant "OpenWeather API" as OW
+end box
+
+== GET /weather?city=London ==
+
+User -> FE: Search weather by city
+FE -> API: GET /?city=London
+activate API
+
+API -> API: Validate API key
+API -> API: Sanitise city input
+API -> WS: getWeatherByCity(city)
+activate WS
+
+WS -> OW: Fetch current weather
+activate OW
+OW --> WS: Return weather data
+deactivate OW
+
+WS --> API: Formatted weather data
+deactivate WS
+API --> FE: JSON response
+deactivate API
+FE --> User: Display weather
+
+== POST /weather (lat/lon) ==
+
+User -> FE: Request weather by location
+FE -> API: POST /weather { lat, lon }
+activate API
+
+API -> API: Validate API key and params
+API -> WS: getForecastByCoords(lat, lon)
+activate WS
+
+WS -> OW: Fetch forecast data
+activate OW
+OW --> WS: Return forecast data
+deactivate OW
+
+WS --> API: Formatted forecast
+deactivate WS
+API --> FE: JSON response
+deactivate API
+FE --> User: Display forecast
+
+== Error Handling ==
+
+alt Invalid API Key or Params
+    API --> FE: Return error JSON (400/401)
+    FE --> User: Show error message
+end
+
+alt External API error
+    OW --> WS: Error response
+    WS --> API: Throw ApiError
+    API --> FE: Return error JSON (mapped)
+    FE --> User: Show error message
+end
+
+@enduml
