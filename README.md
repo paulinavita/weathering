@@ -37,7 +37,7 @@ pnpm install
 3. Create a `.env` file in the root directory and add your weather API key:
 
 ```bash
-NEXT_PUBLIC_WEATHER_API_KEY=your_api_key_here
+OPEN_WEATHER_API_KEY=your_api_key_here
 ```
 
 4. Start the development server:
